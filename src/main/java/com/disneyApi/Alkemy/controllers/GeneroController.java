@@ -21,10 +21,7 @@ public class GeneroController {
     // I. endpoint para guardar un genero
     @PostMapping
     public ResponseEntity<GeneroDTO> saveGenero(@RequestBody GeneroDTO genero) {
-        // II. guardar el genero
         GeneroDTO generoSaved = generoService.save(genero);
-        // III. retornar el genero guardado
         return ResponseEntity.status(HttpStatus.CREATED).body(generoSaved);
-
     }
 }

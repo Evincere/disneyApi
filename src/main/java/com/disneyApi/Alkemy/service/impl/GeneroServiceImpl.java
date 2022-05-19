@@ -2,19 +2,26 @@
 package com.disneyApi.Alkemy.service.impl;
 
 import com.disneyApi.Alkemy.dto.GeneroDTO;
+import com.disneyApi.Alkemy.entity.GeneroEntity;
+import com.disneyApi.Alkemy.mapper.GeneroMapper;
+import com.disneyApi.Alkemy.repository.GeneroRepository;
 import com.disneyApi.Alkemy.service.GeneroService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GeneroServiceImpl implements GeneroService {
     
-    @Override
+    @Autowired
+    GeneroMapper mapper;
+    
+    @Autowired
+    GeneroRepository repository;
+    
     public GeneroDTO save(GeneroDTO dto) {
-
-        // II. validar que el genero no exista
-        // III. guardar el genero
-        // IV. retornar el genero guardado
-        System.out.println("GENERO GUARDADO");
-        return dto;
+        GeneroEntity entity = mapper.generoDTO2Entity(dto);
+        GeneroEntity entitySaved = repository.save(entity);
+        GeneroDTO dtoSaved = mapper.generoEntity2DTO(entitySaved);
+        return dtoSaved;
     }
 }
