@@ -1,0 +1,5 @@
+@startuml
+class PersonajeEntity
+class GeneroEntity
+class FilmEntity
+@enduml
