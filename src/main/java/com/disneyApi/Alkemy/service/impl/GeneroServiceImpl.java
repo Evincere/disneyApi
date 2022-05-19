@@ -6,6 +6,7 @@ import com.disneyApi.Alkemy.entity.GeneroEntity;
 import com.disneyApi.Alkemy.mapper.GeneroMapper;
 import com.disneyApi.Alkemy.repository.GeneroRepository;
 import com.disneyApi.Alkemy.service.GeneroService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,11 @@ public class GeneroServiceImpl implements GeneroService {
         GeneroEntity entitySaved = repository.save(entity);
         GeneroDTO dtoSaved = mapper.generoEntity2DTO(entitySaved);
         return dtoSaved;
+    }
+
+    public List<GeneroDTO> getAllGeneros() {
+        List<GeneroEntity> entities = repository.findAll();
+        List<GeneroDTO> dtos = mapper.generoListEntity2DTO(entities);
+        return dtos;
     }
 }
