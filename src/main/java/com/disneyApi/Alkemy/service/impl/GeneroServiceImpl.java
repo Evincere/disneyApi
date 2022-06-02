@@ -14,21 +14,26 @@ import org.springframework.stereotype.Service;
 public class GeneroServiceImpl implements GeneroService {
     
     @Autowired
-    GeneroMapper mapper;
+    GeneroMapper generoMapper;
     
     @Autowired
-    GeneroRepository repository;
+    GeneroRepository generoRepository;
     
+    /**
+     * save Genero
+     * @param dto
+     * @return GeneroDTO
+     */
     public GeneroDTO save(GeneroDTO dto) {
-        GeneroEntity entity = mapper.generoDTO2Entity(dto);
-        GeneroEntity entitySaved = repository.save(entity);
-        GeneroDTO dtoSaved = mapper.generoEntity2DTO(entitySaved);
+        GeneroEntity entity = generoMapper.generoDTO2Entity(dto, true);
+        GeneroEntity entitySaved = generoRepository.save(entity);
+        GeneroDTO dtoSaved = generoMapper.generoEntity2DTO(entitySaved, true);
         return dtoSaved;
     }
 
     public List<GeneroDTO> getAllGeneros() {
-        List<GeneroEntity> entities = repository.findAll();
-        List<GeneroDTO> dtos = mapper.generoListEntity2DTO(entities);
+        List<GeneroEntity> entities = generoRepository.findAll();
+        List<GeneroDTO> dtos = generoMapper.generoListEntity2DTO(entities);
         return dtos;
     }
 }

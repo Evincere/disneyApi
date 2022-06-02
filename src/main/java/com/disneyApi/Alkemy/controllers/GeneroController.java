@@ -20,16 +20,28 @@ public class GeneroController {
     @Autowired
     private GeneroService generoService;
     
-    // I. endpoint para guardar un genero
+    /**
+     * saveGenero
+     * endpoint para guardar un genero
+     * @param genero DTO
+     * @return GeneroDTO
+     */
     @PostMapping
     public ResponseEntity<GeneroDTO> saveGenero(@RequestBody GeneroDTO genero) {
         GeneroDTO generoSaved = generoService.save(genero);
         return ResponseEntity.status(HttpStatus.CREATED).body(generoSaved);
     }
     
+    /**
+     * getAll
+     * ENDPOINT TRAER TODOS LOS GENEROS
+     * @return 
+     */
     @GetMapping
     public ResponseEntity<List<GeneroDTO>> getAll(){
         List<GeneroDTO> dtos = generoService.getAllGeneros();
         return ResponseEntity.ok().body(dtos);
     }
+    
+    
 }

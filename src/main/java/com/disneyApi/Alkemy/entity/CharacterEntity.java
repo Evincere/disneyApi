@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +21,7 @@ import org.hibernate.annotations.Where;
 @Setter
 @SQLDelete(sql = "UPDATE icon SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
-public class PersonajeEntity {
+public class CharacterEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -33,11 +32,12 @@ public class PersonajeEntity {
     private double weight;
     private String image;
     private String history;
-    
-    //uno o varios personajes pueden estar en una o varias peliculas
-    //la relacion va a estar mapeada por la propiedad del otro lado "listPersonajes"
-    //el dueño de la relacion va a ser filmEntity
-    @ManyToMany(mappedBy = "listPersonajes", cascade = CascadeType.ALL) // mapped: define que la relación va a ser bidireccional, cada tabla va a tener acceso a la otra de forma directa.
+    /**
+     * uno o varios personajes pueden estar en una o varias peliculas
+     * la relacion va a estar mapeada por la propiedad del otro lado "listPersonajes"
+     * el dueño de la relacion va a ser filmEntity
+     */
+    @ManyToMany(mappedBy = "listCharacters", cascade = CascadeType.ALL) 
     private List<FilmEntity> listFilms = new ArrayList<>();
     
     private boolean deleted = Boolean.FALSE;

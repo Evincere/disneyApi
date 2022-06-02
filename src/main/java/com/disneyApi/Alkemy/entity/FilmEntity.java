@@ -3,9 +3,7 @@ package com.disneyApi.Alkemy.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,7 +41,7 @@ public class FilmEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fechaEstreno;
     
-    private int calification[]={1,2,3,4,5};
+    private int calification;
     
     //una o muchas peliculas van a tener solo un genero
     //inicializacion de tipo temprana (fetch tipo EAGER) cuando se pida una pelicula va a volver con su genero
@@ -71,11 +69,7 @@ public class FilmEntity {
             name = "personaje_film",
             joinColumns = @JoinColumn(name = "film_id"), //se utiliza para marcar una propiedad la cual requiere de un JOIN para poder accederla 
             inverseJoinColumns = @JoinColumn(name = "personaje_id"))
-    private Set<PersonajeEntity> listPersonajes = new HashSet<>(); //para poder acceder a listPersonajes es necesario la informacion de la tabla join
-    
-    
-
-    
+    private List<CharacterEntity> listCharacters = new ArrayList<>(); //para poder acceder a listPersonajes es necesario la informacion de la tabla join
     
     private boolean deleted = Boolean.FALSE;
 

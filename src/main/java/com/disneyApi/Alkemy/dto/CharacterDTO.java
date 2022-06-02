@@ -1,18 +1,19 @@
-
 package com.disneyApi.Alkemy.dto;
 
-import java.util.ArrayList;
+import com.disneyApi.Alkemy.entity.FilmEntity;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class GeneroDTO {
+public class CharacterDTO {
 
     private Long id;
     private String name;
+    private int age;
+    private double weight;
     private String image;
-    private List<FilmDTO> listFilms = new ArrayList<>();
-
+    private String history;
+    private List<FilmDTO> listFilms;
 }
