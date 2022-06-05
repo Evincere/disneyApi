@@ -1,6 +1,7 @@
 package com.disneyApi.Alkemy.mapper;
 
 import com.disneyApi.Alkemy.dto.CharacterDTO;
+import com.disneyApi.Alkemy.dto.FilmDTO;
 import com.disneyApi.Alkemy.entity.CharacterEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class CharacterMapper {
         dto.setHistory(entity.getHistory());
         dto.setWeight(entity.getWeight());
         if (loadFilms) {
-            dto.setListFilms(filmMapper.filmListEntity2ListDTO(entity.getListFilms(), true));
+            dto.setListFilms(filmMapper.filmListEntity2ListDTO(entity.getListFilms(), false));
         }
 
         return dto;
@@ -50,11 +51,22 @@ public class CharacterMapper {
         return listCharacterEntities;
     }
 
-    public List<CharacterDTO> characterListEntity2ListDTO(List<CharacterEntity> listCharacterEntities) {
+    public List<CharacterDTO> characterListEntity2ListDTO(List<CharacterEntity> listCharacterEntities, boolean loadFilms) {
         List<CharacterDTO> listCharacterDtos = new ArrayList<>();
         for (CharacterEntity entity : listCharacterEntities) {
-            listCharacterDtos.add(characterMapper.characterEntity2DTO(entity, false));
+            listCharacterDtos.add(characterMapper.characterEntity2DTO(entity, loadFilms));
         }
         return listCharacterDtos;
+    }
+
+    public void characterEntityRefreshValues(CharacterEntity entity, CharacterDTO dto) {
+        entity.setName(dto.getName());
+        entity.setImage(dto.getImage());
+        entity.setAge(dto.getAge());
+        entity.setHistory(dto.getHistory());
+        entity.setWeight(dto.getWeight());
+        for(FilmDTO film : dto.getListFilms()){
+            entity.getListFilms().add(filmMapper.filmDTO2Entity(film, false));
+        }
     }
 }

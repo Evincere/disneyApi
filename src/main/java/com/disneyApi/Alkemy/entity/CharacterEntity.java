@@ -19,7 +19,7 @@ import org.hibernate.annotations.Where;
 @Table(name = "personaje")
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE icon SET deleted = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE personaje SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
 public class CharacterEntity {
     

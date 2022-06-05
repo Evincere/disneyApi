@@ -1,5 +1,6 @@
 package com.disneyApi.Alkemy.mapper;
 
+import com.disneyApi.Alkemy.dto.CharacterDTO;
 import com.disneyApi.Alkemy.dto.FilmDTO;
 import com.disneyApi.Alkemy.entity.FilmEntity;
 import java.time.LocalDate;
@@ -46,7 +47,7 @@ public class FilmMapper {
         dto.setFechaEstreno(entity.getFechaEstreno().toString());
         dto.setGeneroId(entity.getGeneroId());
         if (loadCharacters) {
-            dto.setListCharacters(characterMapper.characterListEntity2ListDTO(entity.getListCharacters()));
+            dto.setListCharacters(characterMapper.characterListEntity2ListDTO(entity.getListCharacters(),false));
         }
         return dto;
     }
@@ -89,6 +90,16 @@ public class FilmMapper {
         return filmListEntities;
     }
 
-    
+    public void filmEntityRefreshValues(FilmEntity entity,FilmDTO dto){
+        entity.setTitle(dto.getTitle());
+        entity.setImage(dto.getImage());
+        entity.setGeneroId(dto.getGeneroId());
+        entity.setFechaEstreno(this.string2LocalDate(dto.getFechaEstreno()));
+        entity.setCalification(dto.getCalification());
+        for(CharacterDTO item : dto.getListCharacters()){
+            entity.getListCharacters().add(characterMapper.characterDTO2Entity(item, false));
+        }
+        
+    }
 
 }

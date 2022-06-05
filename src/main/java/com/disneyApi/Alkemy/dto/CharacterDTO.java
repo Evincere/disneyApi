@@ -1,6 +1,5 @@
 package com.disneyApi.Alkemy.dto;
 
-import com.disneyApi.Alkemy.entity.FilmEntity;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
